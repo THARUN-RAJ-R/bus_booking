@@ -42,7 +42,7 @@ class Seats(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     seat_number = Column(Integer)
-    bus_id = Column(Integer)
+    route_id = Column(Integer)
 
 
 class Users(Base):

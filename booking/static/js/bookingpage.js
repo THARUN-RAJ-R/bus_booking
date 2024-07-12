@@ -3,13 +3,10 @@ document.getElementById('bookingForm').addEventListener('submit', function (even
 
     const routeId = document.getElementById('routeId').value;
     const seatNumber = parseInt(document.getElementById('seatNumber').value);
-    const errorDiv = document.getElementById('error');
-
-    // Clear any previous error message
-    errorDiv.textContent = '';
+    const messageDiv = document.getElementById('message');
 
     if (seatNumber > 30) {
-        alert('Error: Seat number cannot be greater than 30.');
+        messageDiv.innerHTML = '<p>Error: Seat number cannot be greater than 30.</p>';
         return;
     }
 
@@ -22,24 +19,17 @@ document.getElementById('bookingForm').addEventListener('submit', function (even
         body: formData
     })
     .then(response => {
-        console.log('Response status:', response.status);
         if (!response.ok) {
             return response.json().then(data => {
-                throw new Error(data.detail || 'Unknown error occurred');
+                throw new Error(data.detail);
             });
         }
         return response.json();
     })
     .then(data => {
-        console.log('Response data:', data);
-        if (data.error) {
-            alert(`Error: ${data.error}`);
-        } else {
-            alert(`Route ID: ${routeId}, Seat Number: ${seatNumber} booked successfully!`);
-        }
+        messageDiv.innerHTML = `<p>Route ID: ${routeId}, Seat Number: ${seatNumber} booked successfully!</p>`;
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert(`Error: ${error.message}`);
+        messageDiv.innerHTML = `<p> ${error.message}</p>`;
     });
 });

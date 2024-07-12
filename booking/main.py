@@ -60,16 +60,11 @@ def bookings(
             logging.error("Seat number greater than 30")
             raise HTTPException(status_code=400, detail="maximum number of seat is 30")
 
-        route = db.query(models.Route).filter(models.Route.id == route_id).first()
-        if not route:
-            logging.error("Route not found")
-            raise HTTPException(status_code=404, detail="Route not found")
-
-        bus_id = route.bus_id
         existing_seat = (
             db.query(models.Seats)
             .filter(
-                models.Seats.bus_id == bus_id, models.Seats.seat_number == seat_number
+                models.Seats.route_id == route_id,
+                models.Seats.seat_number == seat_number,
             )
             .first()
         )
@@ -78,7 +73,7 @@ def bookings(
             raise HTTPException(status_code=400, detail="Seat already booked")
 
         booking = models.Booking(route_id=route_id, seat_number=seat_number)
-        seat = models.Seats(bus_id=bus_id, seat_number=seat_number)
+        seat = models.Seats(route_id=route_id, seat_number=seat_number)
 
         db.add(booking)
         db.add(seat)
