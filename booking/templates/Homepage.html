@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../static/css/homepage.css">
+</head>
+<body>
+    <div class="homepage-container">
+        <h2>Search for Routes</h2>
+        <form id="search" method="get" action="/search">
+            <label for="source">Source</label>
+            <input type="text" id="source" name="source" required>
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" required>
+            <center>
+            <button type="submit">Search</button></center>
+        </form>
+        <div id="results">
+            <center>
+            <table>
+                
+                <tr>
+                    <th>Route ID</th>
+                    <th>Departure time</th>
+                    <th>arrival time</th>
+                </tr>
+        
+                {% for route in routes %}
+                <tr>
+                    <td><center>{{ route.id }}</center></td>
+                    <td><center>{{ route.departure_time }}:00</center></td>
+                    <td><center>{{ route.arrival_time}}:00</center></td>
+                </tr>
+                {% endfor %}
+            
+            </table><br><br>
+        </center>
+        </div>
+        <div>
+            <center>
+            <button id="book" onclick="booking()">BOOK NOW</button>
+        </center>
+        </div>
+    </div>
+    <script src="../static/js/homepage.js"></script>
+</body>
+</html>

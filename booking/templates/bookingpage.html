@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking</title>
+    <link rel="stylesheet" href="../static/css/bookingpage.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bus Booking</h1>
+        <form id="bookingForm">
+            <label for="routeId">Route ID:</label>
+            <input type="text" id="routeId" name="routeId" required>
+
+            <label for="seatNumber">Seat Number:</label>
+            <input type="number" id="seatNumber" name="seatNumber" required>
+
+            <button type="submit">Book Now</button>
+        </form>
+        <div id="error" class="error"></div>
+    </div>
+    <script src="../static/js/bookingpage.js"></script>
+</body>
+</html>

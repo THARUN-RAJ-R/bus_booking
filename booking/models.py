@@ -37,6 +37,14 @@ class Booking(Base):
     route = relationship("Route", back_populates="bookings")
 
 
+class Seats(Base):
+    __tablename__ = "seats"
+
+    id = Column(Integer, primary_key=True, index=True)
+    seat_number = Column(Integer)
+    bus_id = Column(Integer)
+
+
 class Users(Base):
     __tablename__ = "users"
 
@@ -66,43 +74,43 @@ if db.query(Bus).count() == 0:
         source="A",
         destination="B",
         bus_id=id_1,
-        departure_time=800,
-        arrival_time=1000,
+        departure_time=8,
+        arrival_time=10,
     )
     route_2 = Route(
         source="C",
         destination="D",
         bus_id=id_1,
-        departure_time=1200,
-        arrival_time=1400,
+        departure_time=12,
+        arrival_time=14,
     )
     route_3 = Route(
         source="A",
         destination="B",
         bus_id=id_2,
-        departure_time=900,
-        arrival_time=1100,
+        departure_time=9,
+        arrival_time=11,
     )
     route_4 = Route(
         source="C",
         destination="D",
         bus_id=id_2,
-        departure_time=1300,
-        arrival_time=1500,
+        departure_time=13,
+        arrival_time=15,
     )
     route_5 = Route(
         source="A",
         destination="B",
         bus_id=id_3,
-        departure_time=1000,
-        arrival_time=1200,
+        departure_time=10,
+        arrival_time=12,
     )
     route_6 = Route(
         source="C",
         destination="D",
         bus_id=id_3,
-        departure_time=1400,
-        arrival_time=1600,
+        departure_time=14,
+        arrival_time=16,
     )
 
     db.add(route_1)
